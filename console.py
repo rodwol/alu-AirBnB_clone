@@ -44,10 +44,10 @@ class AluBnBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         # show instance based on class name and ID
-    args = arg.split()
-    if len(args) == 0:
-        print("** class name missing **")
-        return
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
     if not self.validate_class_name(args[0]):
         print("** class doesn't exist **")
         return
@@ -63,10 +63,10 @@ class AluBnBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         # to delete an instance based on class name and ID
-    args = arg.split()
-    if len(args) == 0:
-        print("** class name missing **")
-        return
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
     if not self.validate_class_name(args[0]):
         print("** class doesn't exist **")
         return
