@@ -26,23 +26,24 @@ class AluBnBCommand(cmd.Cmd):
     """
     # class definition
     prompt = ">"
-    
+
     """ command methods """
+
     def do_create(self, arg):
-    # create a new instance
+        # create a new instance
     if not arg:
         print("** class name missing **")
         return
 
     try:
-        obj = eval(arg)() # create an instance
-        obj.save() # save the instance to storage
+        obj = eval(arg)()  # create an instance
+        obj.save()  # save the instance to storage
         print(obj.id)
     except NameError:
         print("** class doesn't exist **")
 
     def do_show(self, arg):
-    # show instance based on class name and ID
+        # show instance based on class name and ID
     args = arg.split()
     if len(args) == 0:
         print("** class name missing **")
@@ -61,7 +62,7 @@ class AluBnBCommand(cmd.Cmd):
         print(storage.all()[key])
 
     def do_destroy(self, arg):
-    # to delete an instance based on class name and ID
+        # to delete an instance based on class name and ID
     args = arg.split()
     if len(args) == 0:
         print("** class name missing **")
@@ -81,12 +82,13 @@ class AluBnBCommand(cmd.Cmd):
         storage.save()
 
     def do_all(self, arg):
-    # show all instances
+        # show all instances
     args = self.parse_args(arg)
     if len(args) == 0:
         objects = storage.all().values()
     elif self.validate_class_name(args[0]):
-        objects = [obj for obj in storage.all().values() if type(obj).__name__ == arg]
+        objects = [obj for obj in storage.all().values()
+                   if type(obj).__name__ == arg]
     else:
         print("** class doesn't exist **")
         return
@@ -94,7 +96,7 @@ class AluBnBCommand(cmd.Cmd):
     print([str(obj) for obj in objects])
 
     def do_update(self, arg):
-    # update an instance's attributes
+        # update an instance's attributes
     args = shlex.split(arg)
     if len(args) == 0:
         print("** class name missing **")
@@ -122,20 +124,22 @@ class AluBnBCommand(cmd.Cmd):
 
     """ helper methods(with parsing and validating commands)
     """
+
     def parse_args(self, arg):
-    # parse command arguments
+        # parse command arguments
     return shlex.split(arg)
 
     def validate_class_name(self, class_name):
-    # validate if class name is correct
+        # validate if class name is correct
     if class_name not in storage.classes():
         print("** class doesn't exist **")
         return False
     return True
 
     """ default methods(handles unrecognized commands)"""
+
     def default(self, line):
-    # handle unrecognized commands
+        # handle unrecognized commands
     pass
 
     def do_EOF(self, line):
@@ -147,6 +151,7 @@ class AluBnBCommand(cmd.Cmd):
 
     def emptyline(self):
     pass
+
 
 if __name__ == '__main__':
     AluBnBCommand().cmdloop()
