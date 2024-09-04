@@ -87,7 +87,8 @@ class AluBnBCommand(cmd.Cmd):
         if len(args) == 0:
             objects = storage.all().values()
         elif self.validate_class_name(args[0]):
-            objects = [obj for obj in storage.all().values() if type(obj).__name__ == arg]
+            objects = [obj for obj in storage.all().values()\
+            if type(obj).__name__ == arg]
         else:
             print("** class doesn't exist **")
             return
