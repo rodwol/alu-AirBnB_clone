@@ -31,9 +31,9 @@ class AluBnBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         # create a new instance
-    if not arg:
-        print("** class name missing **")
-        return
+        if not arg:
+            print("** class name missing **")
+            return
 
     try:
         obj = eval(arg)()  # create an instance
@@ -83,74 +83,72 @@ class AluBnBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         # show all instances
-    args = self.parse_args(arg)
-    if len(args) == 0:
-        objects = storage.all().values()
-    elif self.validate_class_name(args[0]):
-        objects = [obj for obj in storage.all().values()
-                   if type(obj).__name__ == arg]
-    else:
-        print("** class doesn't exist **")
-        return
-
-    print([str(obj) for obj in objects])
+        args = self.parse_args(arg)
+        if len(args) == 0:
+            objects = storage.all().values()
+        elif self.validate_class_name(args[0]):
+            objects = [obj for obj in storage.all().values() if type(obj).__name__ == arg]
+        else:
+            print("** class doesn't exist **")
+            return
+        print([str(obj) for obj in objects])
 
     def do_update(self, arg):
         # update an instance's attributes
-    args = shlex.split(arg)
-    if len(args) == 0:
-        print("** class name missing **")
-        return
-    if not self.validate_class_name(args[0]):
-        return
-    if len(args) == 1:
-        print("** instance id missing **")
-        return
+        args = shlex.split(arg)
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if not self.validate_class_name(args[0]):
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
 
-    key = f"{args[0]}.{args[1]}"
-    if key not in storage.all():
-        print("** no instance found **")
-        return
-    if len(args) == 2:
-        print("** attribute name missing **")
-        return
-    if len(args) == 3:
-        print("** value missing **")
-        return
+        key = f"{args[0]}.{args[1]}"
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args) == 3:
+            print("** value missing **")
+            return
 
-    obj = storage.all()[key]
-    setattr(obj, args[2], args[3])
-    obj.save()
+        obj = storage.all()[key]
+        setattr(obj, args[2], args[3])
+        obj.save()
 
-    """ helper methods(with parsing and validating commands)
-    """
+        """ helper methods(with parsing and validating commands)
+        """
 
     def parse_args(self, arg):
         # parse command arguments
-    return shlex.split(arg)
+        return shlex.split(arg)
 
     def validate_class_name(self, class_name):
         # validate if class name is correct
-    if class_name not in storage.classes():
-        print("** class doesn't exist **")
-        return False
-    return True
+        if class_name not in storage.classes():
+            print("** class doesn't exist **")
+            return False
+        return True
 
-    """ default methods(handles unrecognized commands)"""
+        """ default methods(handles unrecognized commands)"""
 
     def default(self, line):
         # handle unrecognized commands
-    pass
+        pass
 
     def do_EOF(self, line):
-    print()
-    return True
+        print()
+        return True
 
     def do_quit(self, arg):
-    return True
+        return True
 
     def emptyline(self):
-    pass
+        pass
 
 
 if __name__ == '__main__':
