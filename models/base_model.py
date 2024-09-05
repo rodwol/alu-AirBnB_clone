@@ -7,6 +7,7 @@ defines the BaseModel class which serves as the base for all other classes
 """
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -15,7 +16,7 @@ class BaseModel:
     in the project
     """
 
-    def __init__(self,  *args, **kwargs):
+    def __init__(self,  *_args, **kwargs):
         """Initialize a new BaseModel."""
 
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
@@ -31,6 +32,7 @@ class BaseModel:
         else:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
@@ -39,6 +41,7 @@ class BaseModel:
         """Set updated_at to current datetime."""
 
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Return dictionary of BaseModel class"""
