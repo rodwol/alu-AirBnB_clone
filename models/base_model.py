@@ -14,19 +14,26 @@ class BaseModel:
     a base class that defines all common attributes for other classes
     in the project
     """
+
     def __init__(self):
+        """Initialize a new BaseModel."""
+
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = self.created_at
 
     def __str__(self):
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
-        self.__dict__)
+                                     self.__dict__)
 
     def save(self):
+        """Set updated_at to current datetime."""
+
         self.updated_at = datetime.now()
 
     def to_dict(self):
+        """Return dictionary of BaseModel class"""
+
         dict_rep = self.__dict__.copy()
         dict_rep['__class__'] = self.__class__.__name__
         dict_rep['created_at'] = self.created_at.isoformat()
