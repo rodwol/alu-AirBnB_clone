@@ -23,8 +23,10 @@ class BaseModel:
         self.id = str(uuid.uuid4())
 
         if kwargs:
-            kwargs["created_at"] = datetime.strptime(kwargs["created_at"], time_format)
-            kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"], time_format)
+            kwargs["created_at"] = datetime.strptime(
+                kwargs["created_at"], time_format)
+            kwargs["updated_at"] = datetime.strptime(
+                kwargs["updated_at"], time_format)
             self.__dict__.update(kwargs)
         else:
             self.created_at = datetime.now()
