@@ -38,11 +38,12 @@ class FileStorage:
         f.write(text)
 
     def reload(self):
-        if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r") as f:
-                obj_dict = json.load(f)
-                for key, value in obj_dict.items():
-                    cls_name = value['__class__']
-                    if cls_name == "BaseModel":
-                        # Recreate the object using BaseModel
-                        FileStorage.__objects[key] = BaseModel(**value)
+        try:
+            with open(FileStorage.__file_path) as f:
+                objdict = json.load(f)
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))
+        except FileNotFoundError:
+            return
