@@ -1,11 +1,8 @@
 #!/usr/bin/python3
 """
-This file serves as the entry point for the command interpreter,
+This file serves as the entry point for the command interpreter
 allowing the user to interact with the app through CLI
-
 """
-
-
 import cmd
 import sys
 import re
