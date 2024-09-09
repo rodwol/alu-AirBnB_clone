@@ -30,7 +30,8 @@ class FileStorage:
     def new(self, obj):
         """Add/Save a new object."""
 
-        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj.to_dict()
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj.to_dict()
 
     def save(self):
         """Save the objects to the JSON file."""

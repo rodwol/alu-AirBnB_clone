@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-This file serves as the entry point for the command interpreter
-allowing the user to interact with the app through CLI
+
 """
 import cmd
 import sys
@@ -18,7 +17,7 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-class AluBnBCommand(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """ created a class
     """
     # class definition
@@ -32,12 +31,12 @@ class AluBnBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-    try:
-        obj = eval(arg)()  # create an instance
-        obj.save()  # save the instance to storage
-        print(obj.id)
-    except NameError:
-        print("** class doesn't exist **")
+        try:
+            obj = eval(arg)()  # create an instance
+            obj.save()  # save the instance to storage
+            print(obj.id)
+        except NameError:
+            print("** class doesn't exist **")
 
     def do_show(self, arg):
         # show instance based on class name and ID
@@ -45,18 +44,18 @@ class AluBnBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-    if not self.validate_class_name(args[0]):
-        print("** class doesn't exist **")
-        return
-    if len(args) == 1:
-        print("** instance id missing **")
-        return
+        if not self.validate_class_name(args[0]):
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
 
-    key = f"{args[0]}.{args[1]}"
-    if key not in storage.all():
-        print("** no instance found **")
-    else:
-        print(storage.all()[key])
+        key = "{}.{}".format(args[0], args[1])
+        if key not in storage.all():
+            print("** no instance found **")
+        else:
+            print(storage.all()[key])
 
     def do_destroy(self, arg):
         # to delete an instance based on class name and ID
@@ -64,19 +63,19 @@ class AluBnBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-    if not self.validate_class_name(args[0]):
-        print("** class doesn't exist **")
-        return
-    if len(args) == 1:
-        print("** instance id missing **")
-        return
+        if not self.validate_class_name(args[0]):
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
 
-    key = f"{args[0]}.{args[1]}"
-    if key not in storage.all():
-        print("** no instance **")
-    else:
-        del storage.all()[key]
-        storage.save()
+        key = "{}.{}".format(args[0], args[1])
+        if key not in storage.all():
+            print("** no instance **")
+        else:
+            del storage.all()[key]
+            storage.save()
 
     def do_all(self, arg):
         # show all instances
@@ -103,7 +102,7 @@ class AluBnBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        key = f"{args[0]}.{args[1]}"
+        key = "{}.{}".format(args[0], args[1])
         if key not in storage.all():
             print("** no instance found **")
             return
@@ -150,4 +149,4 @@ class AluBnBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    AluBnBCommand().cmdloop()
+    HBNBCommand().cmdloop()
