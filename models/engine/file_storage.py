@@ -39,10 +39,10 @@ class FileStorage:
 
     def reload(self):
         if os.path.exists(FileStorage.__file_path):
-        with open(FileStorage.__file_path, "r") as f:
-            obj_dict = json.load(f)
-            for key, value in obj_dict.items():
-                cls_name = value['__class__']
-                if cls_name == "BaseModel":
-                    # Recreate the object using BaseModel
-                    FileStorage.__objects[key] = BaseModel(**value)
+            with open(FileStorage.__file_path, "r") as f:
+                obj_dict = json.load(f)
+                for key, value in obj_dict.items():
+                    cls_name = value['__class__']
+                    if cls_name == "BaseModel":
+                        # Recreate the object using BaseModel
+                        FileStorage.__objects[key] = BaseModel(**value)
