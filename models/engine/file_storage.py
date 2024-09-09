@@ -41,11 +41,9 @@ class FileStorage:
         f.write(text)
 
     def reload(self):
-        if isfile(FileStorage.__file_path):
-        # Use isfile to check for a file
-            with open(FileStorage.__file_path, "r") as f:
-                obj_dict = json.load(f)
-                for key, value in obj_dict.items():
-                    cls_name = value['__class__']
-                    if cls_name == "BaseModel":
-                        FileStorage.__objects[key] = BaseModel(**value)
+        """Load and deserialize the JSON file to objects if it exists"""
+
+        if isfile(self.__file_path):
+            f = open(self.__file_path, "r")
+            text = f.read()
+            self.__objects = json.loads(text)
