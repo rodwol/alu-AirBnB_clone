@@ -66,5 +66,24 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(key, self.storage.all())
         self.assertIsInstance(self.storage.all()[key], BaseModel)
 
+    def test_save_c(self):
+        model1 = BaseModel()
+        model2 = BaseModel()
+        self.storage.new(model1)
+        self.storage.new(model2)
+        self.storage.save()
+
+        # Check that the file is created
+        self.assertTrue(os.path.exists(self.file_path))
+
+        # Check the contents of the file
+        with open(self.file_path, "r") as f:
+            data = json.load(f)
+            key1 = f"BaseModel.{model1.id}"
+            key2 = f"BaseModel.{model2.id}"
+            self.assertIn(key1, data)
+            self.assertIn(key2, data)
+            self.assertEqual(data[key1]['id'], model1.id)
+            self.assertEqual(data[key2]['id'], model2.id)
 if __name__ == '__main__':
     unittest.main()
