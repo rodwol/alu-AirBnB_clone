@@ -7,6 +7,7 @@ serializes instances to a JSON file and deserializes JSON files to instances
 
 import json
 from os.path import isfile
+from models.base_model import BaseModel
 
 
 class FileStorage:
