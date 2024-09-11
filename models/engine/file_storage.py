@@ -53,19 +53,4 @@ class FileStorage:
         if isfile(self.__file_path):
             f = open(self.__file_path, "r")
             text = f.read()
-            obj_dict = json.loads(text)
-
-        class_map = {
-            "BaseModel": BaseModel,
-            "User": User,
-            "Place": Place,
-            "City": City,
-            "State": State,
-            "Amenity": Amenity,
-            "Review": Review
-        }
-       
-        for key, value in obj_dict.items():
-            class_name = key.split(".")[0]
-            if class_name in class_map:
-                self.__objects[key] = class_map[class_name](**value)
+            self.__objects = json.loads(text)
