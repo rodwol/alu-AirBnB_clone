@@ -46,4 +46,8 @@ class FileStorage:
         if isfile(self.__file_path):
             f = open(self.__file_path, "r")
             text = f.read()
-            self.__objects = json.loads(text)
+            obj_dict = json.loads(text)
+
+        for key, value in obj_dict.items():
+            class_name = key.split(".")[0]
+            self.__objects[key] = globals()[class_name](**value)
