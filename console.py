@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
     """ created a class
     """
     # class definition
-    prompt = ">"
+    prompt = "(hbnb) "
 
     """ command methods """
 
