@@ -1,6 +1,14 @@
 #!/usr/bin/python3
 """
+This file serves as the entry point for the command interpreter,
+allowing the user to interact with the app through CLI.
 
+cmd: Python's built-in module to provide
+command-line interface functionality.
+shlex: Module to handle the parsing of command arguments.
+storage: A storage engine for saving and retrieving instances.
+BaseModel, User, Place, State, City, Amenity, Review: These are the
+models representing different entities in the AluBnB application.
 """
 import cmd
 import sys
