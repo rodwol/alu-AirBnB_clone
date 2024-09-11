@@ -7,6 +7,13 @@ serializes instances to a JSON file and deserializes JSON files to instances
 
 import json
 from os.path import isfile
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -60,4 +67,5 @@ class FileStorage:
        
         for key, value in obj_dict.items():
             class_name = key.split(".")[0]
-            self.__objects[key] = globals()[class_name](**value)
+            if class_name in class_map:
+                self.__objects[key] = class_map[class_name](**value)
