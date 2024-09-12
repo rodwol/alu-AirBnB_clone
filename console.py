@@ -105,6 +105,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
         if not self.validate_class_name(args[0]):
+            print("** class doesn't exist **")
         if len(args) == 1:
             print("** instance id missing **")
 
