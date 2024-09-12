@@ -122,8 +122,13 @@ class HBNBCommand(cmd.Cmd):
             return
 
         obj = storage.all()[key]
-        setattr(obj, args[2], args[3])
-        obj.save()
+        
+        if isinstance(obj, dict):
+            obj[args[2]] = args[3]
+            obj.save()
+        else:
+            setattr(obj, args[2], args[3])
+            obj.save()
 
         """ helper methods(with parsing and validating commands)
         """
