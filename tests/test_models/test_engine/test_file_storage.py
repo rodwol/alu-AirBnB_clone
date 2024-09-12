@@ -35,7 +35,7 @@ class TestFileStorage(unittest.TestCase):
         """
         model = BaseModel()
         self.storage.new(model)
-        key = f"BaseModel.{model.id}"
+        key = "BaseModel.{}".format(model.id)
         self.assertIn(key, self.storage.all())
 
     def test_save_serializes_objects(self):
@@ -50,7 +50,7 @@ class TestFileStorage(unittest.TestCase):
         # Check the contents of the file
         with open(self.file_path, "r") as f:
             data = json.load(f)
-            key = f"BaseModel.{model.id}"
+            key = "BaseModel.{}".format(model.id)
             self.assertIn(key, data)
 
     def test_reload_deserializes_objects(self):
@@ -62,7 +62,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage.reload()
         
         # Ensure that objects are reloaded into __objects
-        key = f"BaseModel.{model.id}"
+        key = "BaseModel.{}".format(model.id)
         self.assertIn(key, self.storage.all())
         self.assertIsInstance(self.storage.all()[key], BaseModel)
 
@@ -79,8 +79,8 @@ class TestFileStorage(unittest.TestCase):
         # Check the contents of the file
         with open(self.file_path, "r") as f:
             data = json.load(f)
-            key1 = f"BaseModel.{model1.id}"
-            key2 = f"BaseModel.{model2.id}"
+            key1 = "BaseModel.{}".format(model1.id)
+            key2 = "BaseModel.{}".format(model2.id)
             self.assertIn(key1, data)
             self.assertIn(key2, data)
             self.assertEqual(data[key1]['id'], model1.id)

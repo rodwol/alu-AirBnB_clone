@@ -7,6 +7,7 @@ serializes instances to a JSON file and deserializes JSON files to instances
 
 import json
 from os.path import isfile
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -36,14 +37,17 @@ class FileStorage:
     def save(self):
         """Save the objects to the JSON file."""
 
-        f = open(self.__file_path, "w")
-        text = json.dumps(self.__objects)
-        f.write(text)
+        with open(self.__file_path, "w", encoding='UTF-8') as f:
+            json.dump(self.__objects, f)
 
     def reload(self):
         """Load and deserialize the JSON file to objects if it exists"""
 
         if isfile(self.__file_path):
-            f = open(self.__file_path, "r")
-            text = f.read()
-            self.__objects = json.loads(text)
+            with open(self.__file_path, "r", encoding='UTF-8') as f:
+                obj_dict = json.load(f)
+                for key, value in obj_dict.items():
+                    class_name = value['__class__']
+                    cls = globals().get(class_name)
+                    if cls:
+                        self.__objects[key] = cls(**value)
