@@ -38,7 +38,8 @@ class FileStorage:
         """Save the objects to the JSON file."""
 
         with open(self.__file_path, "w", encoding='UTF-8') as f:
-            json.dump(self.__objects, f)
+            json.dump(self.__objects, f) for k, v in\
+            self.__objects.items()}, f)
 
     def reload(self):
         """Load and deserialize the JSON file to objects if it exists"""
