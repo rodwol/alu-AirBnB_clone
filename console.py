@@ -100,31 +100,41 @@ class HBNBCommand(cmd.Cmd):
         print([str(obj) for obj in objects])
 
     def do_update(self, arg):
-        # update an instance's attributes
         args = shlex.split(arg)
+
         if len(args) == 0:
             print("** class name missing **")
+            return
+
         if not self.validate_class_name(args[0]):
             print("** class doesn't exist **")
+            return
+
         if len(args) == 1:
             print("** instance id missing **")
+            return
 
         key = "{}.{}".format(args[0], args[1])
         if key not in storage.all():
             print("** no instance found **")
+            return
+
         if len(args) == 2:
             print("** attribute name missing **")
+            return
+
         if len(args) == 3:
             print("** value missing **")
+            return
 
         obj = storage.all()[key]
-        
-        if isinstance(obj, dict):
-            obj[args[2]] = args[3]
+
+        try:
+            value = eval(args[3])  # Convert string value to appropriate type
+            setattr(obj, args[2], value)
             obj.save()
-        else:
-            setattr(obj, args[2], args[3])
-            obj.save()
+        except Exception as e:
+            print(f"** error: {e} **")
 
         """ helper methods(with parsing and validating commands)
         """
