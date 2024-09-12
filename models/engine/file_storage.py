@@ -43,7 +43,7 @@ class FileStorage:
     def save(self):
         """Save the objects to the JSON file."""
 
-        with open(self.__file_path, "w", encoding='UTF-8') as f:
+        with open(self.__file_path, "w") as f:
             json.dump({k: v.to_dict() if hasattr(v, "to_dict") else v\
             for k, v in self.__objects.items()}, f)
 
@@ -51,7 +51,7 @@ class FileStorage:
         """Load and deserialize the JSON file to objects if it exists"""
 
         if isfile(self.__file_path):
-            with open(self.__file_path, "r", encoding='UTF-8') as f:
+            with open(self.__file_path, "r") as f:
                 obj_dict = json.load(f)
                 for key, value in obj_dict.items():
                     class_name = value['__class__']
