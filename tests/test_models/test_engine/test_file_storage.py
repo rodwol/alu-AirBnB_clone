@@ -8,6 +8,7 @@ import json
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
+
 class TestFileStorage(unittest.TestCase):
     """Unit tests for the FileStorage class"""
 
@@ -15,6 +16,10 @@ class TestFileStorage(unittest.TestCase):
         # set up resources before each test
         self.file_path = "file.json"
         self.storage = FileStorage()
+        self.model = BaseModel()
+
+        FileStorage._FileStorage__objects = {}
+
         if os.path.exists(self.file_path):
             os.remove(self.file_path)
 

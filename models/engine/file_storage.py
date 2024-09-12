@@ -58,3 +58,13 @@ class FileStorage:
                     cls = globals().get(class_name)
                     if cls:
                         self.__objects[key] = cls(**value)
+    def classes(self):
+        return {
+            "State" = State,
+            "BaseModel" = BaseModel,
+            "User" = User,
+            "City" = City,
+            "Review" = Review,
+            "Amenity" = Amenity,
+            "Place" = Place
+        }
