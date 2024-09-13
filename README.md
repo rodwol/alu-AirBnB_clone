@@ -15,15 +15,9 @@ This project is an AirBnB clone, developed to understand the core functionalitie
 
 1. Clone this repository:
 
-    \`\`\`bash
-    git clone https://github.com/yourusername/airbnb_clone.git
-    cd airbnb_clone
     \`\`\`
-
-2. Install the required dependencies (if any):
-
-    \`\`\`bash
-    pip install -r requirements.txt
+    git clone https://github.com/rodwol/alu-AirBnB_clone.git
+    cd alu-AirBnB_clone
     \`\`\`
 
 ## Usage
@@ -32,7 +26,7 @@ This project is an AirBnB clone, developed to understand the core functionalitie
 
 To start the command interpreter:
 
-\`\`\`bash
+\`\`\`
 python console.py
 \`\`\`
 
@@ -40,31 +34,31 @@ python console.py
 
 - **Create an object:**
 
-    \`\`\`bash
+    \`\`\`
     create <class_name> <arguments>
     \`\`\`
 
 - **Show all objects:**
 
-    \`\`\`bash
+    \`\`\`
     all <class_name>
     \`\`\`
 
 - **Show a specific object by ID:**
 
-    \`\`\`bash
+    \`\`\`
     show <class_name> <id>
     \`\`\`
 
 - **Destroy an object by ID:**
 
-    \`\`\`bash
+    \`\`\`
     destroy <class_name> <id>
     \`\`\`
 
 - **Update an object's attributes:**
 
-    \`\`\`bash
+    \`\`\`
     update <class_name> <id> <attribute> <value>
     \`\`\`
 
@@ -81,7 +75,7 @@ python console.py
 
 To run the unittests:
 
-\`\`\`bash
+\`\`\`
 python -m unittest discover -s tests
 \`\`\`
 
