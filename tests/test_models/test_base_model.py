@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import unittest
-from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
+import models
 from datetime import datetime
 import uuid
 
