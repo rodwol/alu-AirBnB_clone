@@ -20,9 +20,6 @@ class FileStorage:
     """
     a class that serializes/deserializes instances to/from JSON
     """
-    __file_path = "file.json"
-    __objects = {}
-
     def __init__(self):
         """Initialize a new FileStorage."""
 
@@ -38,26 +35,29 @@ class FileStorage:
         """Add/Save a new object."""
 
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj.to_dict()
+        self.__objects[key] = obj
 
     def save(self):
         """Save the objects to the JSON file."""
 
+        odict = self.__objects
+        objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
         with open(self.__file_path, "w") as f:
-            json.dump({k: v.to_dict()\
-            for k, v in self.__objects.items()}, f)
+            json.dump(objdict, f)
 
     def reload(self):
         """Load and deserialize the JSON file to objects if it exists"""
 
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, "r") as f:
-                obj_dict = json.load(f)
-                for key, value in obj_dict.items():
-                    class_name = value['__class__']
-                    cls = globals().get(class_name)
-                    if cls:
-                        self.__objects[key] = cls(**value)
+        try:
+            with open(self.__file_path) as f:
+                objdict = json.load(f)
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))
+        except FileNotFoundError:
+            return
+
     def classes(self):
         return {
             "State": State,
