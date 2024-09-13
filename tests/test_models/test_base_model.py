@@ -71,7 +71,7 @@ class TestBaseModel(unittest.TestCase):
         """Test that calling `save` persists the instance in storage."""
         self.my_model.save()
 
-        key = f"BaseModel.{self.model.id}"
+        key = f"BaseModel.{self.my_model.id}"
         all_objects = storage.all()
 
         self.assertIn(key, all_objects)
