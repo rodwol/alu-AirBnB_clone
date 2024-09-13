@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
         if key not in storage.all():
             print("** no instance found **")
         else:
-            # print(storage.all()[key])
+            print(storage.all()[key])
             return
 
     def do_destroy(self, arg):
@@ -81,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = "{}.{}".format(args[0], args[1])
         if key not in storage.all():
-            print("** no instance **")
+            print("** no instance found **")
         else:
             del storage.all()[key]
             storage.save()
@@ -130,7 +130,7 @@ class HBNBCommand(cmd.Cmd):
         obj = storage.all()[key]
 
         try:
-            value = eval(args[3])  # Convert string value
+            value = eval(args[3])
             setattr(obj, args[2], value)
             obj.save()
         except Exception as e:
