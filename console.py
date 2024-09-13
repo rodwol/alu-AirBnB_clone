@@ -130,7 +130,7 @@ class HBNBCommand(cmd.Cmd):
         obj = storage.all()[key]
 
         try:
-            value = eval(args[3])  # Convert string value to appropriate type
+            value = eval(args[3])  # Convert string value
             setattr(obj, args[2], value)
             obj.save()
         except Exception as e:
