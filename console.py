@@ -130,7 +130,11 @@ class HBNBCommand(cmd.Cmd):
         obj = storage.all()[key]
 
         try:
-            value = eval(args[3])
+            value = args[3]
+            if value.isdigit():
+                value = int(value)
+            elif re.match(r"^\d+\.\d+$", value):
+                value = float(value)
             setattr(obj, args[2], value)
             obj.save()
         except Exception as e:
