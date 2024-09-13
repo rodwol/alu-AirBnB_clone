@@ -60,22 +60,22 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(new_model.to_dict(), self.my_model.to_dict())
     def test_save_updates_updated_at(self):
         """Test that calling `save` updates the `updated_at` attribute."""
-        old_updated_at = self.model.updated_at
-        self.model.save()
+        old_updated_at = self.my_model.updated_at
+        self.my_model.save()
 
         # Check that updated_at has been updated to a later time
-        self.assertNotEqual(self.model.updated_at, old_updated_at)
-        self.assertTrue(self.model.updated_at > old_updated_at)
+        self.assertNotEqual(self.my_model.updated_at, old_updated_at)
+        self.assertTrue(self.my_model.updated_at > old_updated_at)
 
     def test_save_persists_in_storage(self):
         """Test that calling `save` persists the instance in storage."""
-        self.model.save()
+        self.my_model.save()
 
         key = f"BaseModel.{self.model.id}"
         all_objects = storage.all()
 
         self.assertIn(key, all_objects)
-        self.assertEqual(all_objects[key], self.model)
+        self.assertEqual(all_objects[key], self.my_model)
 
 if __name__ == '__main__':
     unittest.main()
