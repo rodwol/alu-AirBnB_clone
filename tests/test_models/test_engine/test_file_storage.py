@@ -129,10 +129,10 @@ class TestFileStorage(unittest.TestCase):
             os.remove(self.file_path)
 
         # Call reload (should do nothing)
-        self.file_storage.reload()
+        self.storage.reload()
 
         # __objects should remain empty
-        self.assertEqual(self.file_storage._FileStorage__objects, {})
+        self.assertEqual(self.storage._FileStorage__objects, {})
 
     def test_reload_with_file(self):
         """Test reload when the JSON file exists and contains valid data."""
@@ -148,7 +148,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage.reload()
 
         # __objects should contain the BaseModel object we serialized
-        objects = self.file_storage._FileStorage__objects
+        objects = self.storage._FileStorage__objects
         self.assertIn(f"BaseModel.{base_model.id}", objects)
 
         # Ensure the object deserialized correctly
