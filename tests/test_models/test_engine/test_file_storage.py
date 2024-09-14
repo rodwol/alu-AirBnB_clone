@@ -94,6 +94,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_file_path(self):
         """Test if the __file_path attribute is correctly set"""
+        expected_file_path = "file.json"
         actual_file_path = getattr(self.storage, "_FileStorage__file_path")
         print(f"Expected: {expected_file_path}")
         print(f"Actual: {actual_file_path}")
