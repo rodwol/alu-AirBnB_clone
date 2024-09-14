@@ -73,7 +73,7 @@ class TestBaseModel(unittest.TestCase):
         self.my_model.save()
 
         key = f"BaseModel.{self.my_model.id}"
-        all_objects = storage.all()
+        all_objects = models.storage.all()
 
         self.assertIn(key, all_objects)
         self.assertEqual(all_objects[key], self.my_model)
