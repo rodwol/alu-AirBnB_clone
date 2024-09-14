@@ -26,6 +26,12 @@ class FileStorage:
         self.__file_path = "file.json"
         self.__objects = {}
 
+    def get_file_path(self):
+        return self.__file_path
+
+    def get_objects(self):
+        return self.__objects
+
     def all(self):
         """Return all objects."""
 
