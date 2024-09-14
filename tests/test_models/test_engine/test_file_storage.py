@@ -7,6 +7,7 @@ import os
 import json
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+import models
 
 
 class TestFileStorage(unittest.TestCase):
@@ -140,7 +141,7 @@ class TestFileStorage(unittest.TestCase):
         obj_dict = {f"BaseModel.{base_model.id}": base_model.to_dict()}
 
         # Write the dict to the temp file in JSON format
-        with open(self.temp_file, "w") as f:
+        with open(self.file_path, "w") as f:
             json.dump(obj_dict, f)
 
         # Call reload (should populate __objects with deserialized data)
