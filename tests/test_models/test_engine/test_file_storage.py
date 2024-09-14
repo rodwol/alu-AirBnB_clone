@@ -125,8 +125,8 @@ class TestFileStorage(unittest.TestCase):
     def test_reload_no_file(self):
         """Test reload when the JSON file doesn't exist."""
         # Ensure no file exists
-        if os.path.exists(self.temp_file):
-            os.remove(self.temp_file)
+        if os.path.exists(self.file_path):
+            os.remove(self.file_path)
 
         # Call reload (should do nothing)
         self.file_storage.reload()
@@ -145,7 +145,7 @@ class TestFileStorage(unittest.TestCase):
             json.dump(obj_dict, f)
 
         # Call reload (should populate __objects with deserialized data)
-        self.file_storage.reload()
+        self.storage.reload()
 
         # __objects should contain the BaseModel object we serialized
         objects = self.file_storage._FileStorage__objects
