@@ -106,12 +106,12 @@ class TestFileStorage(unittest.TestCase):
     def test_FileStorage_file_path_is_private_str(self):
         """Test that __file_path is a private string attribute."""
         fs = FileStorage()  # Create an instance of FileStorage
-        self.assertEqual(str, type(fs._FileStorage__file_path))
+        self.assertEqual(type(fs._FileStorage__file_path), str)
 
     def test_FileStorage_objects_is_private_dict(self):
         """Test that __objects is a private dictionary attribute."""
         fs = FileStorage()
-        self.assertEqual(dict, type(fs._FileStorage__objects))
+        self.assertEqual(type(fs._FileStorage__objects), dict)
 
     def test_storage_initializes(self):
         """Test that the storage object is an instance of FileStorage."""
