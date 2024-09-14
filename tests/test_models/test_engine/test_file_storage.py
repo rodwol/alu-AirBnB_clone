@@ -94,9 +94,10 @@ class TestFileStorage(unittest.TestCase):
 
     def test_file_path(self):
         """Test if the __file_path attribute is correctly set"""
-        expected_file_path = "file.json"
-        self.assertEqual(getattr(self.storage,\
-        "_FileStorage__file_path"), expected_file_path)
+        actual_file_path = getattr(self.storage, "_FileStorage__file_path")
+        print(f"Expected: {expected_file_path}")
+        print(f"Actual: {actual_file_path}")
+        self.assertEqual(actual_file_path, expected_file_path)
 
     def test_objects_initialization(self):
         self.assertEqual(getattr(self.storage,\
